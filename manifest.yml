@@ -1,0 +1,27 @@
+---
+language: php
+
+exclude_files:
+  - .git/
+  - .gitignore
+  - .gitmodules
+  - cf_spec/
+  - log/
+  - test/
+  - bin/package
+  - buildpack-packager/
+  - nodejs_buildpack-*v*.zip
+
+url_to_dependency_map:
+  - match: php\/v(\d+\.\d+\.\d+)
+    name: php
+    version: $1
+
+dependencies:
+  - name: httpd
+    version: 2.4.12
+    uri: https://pivotal-buildpacks.s3.amazonaws.com/php/binaries/lucid/httpd/2.4.12/httpd-2.4.12.tar.gz
+    md5: fake_md5
+    cf_stacks:
+      - lucid64
+      - cflinuxfs2

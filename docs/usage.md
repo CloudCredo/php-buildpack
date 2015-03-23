@@ -91,6 +91,18 @@ The `.bp-config` directory should exist at the root of your project directory an
 
 The `.extensions` directory should also exist at the root of your project directory and it is the location of application specific custom extensions.  Application specific custom extensions allow you, the developer, to override or enhance the behavior of the build pack.  This link explains [extensions] in more detail.
 
+## Start Commands
+
+To deploy your app with custom start commands at runtime, use the `-c "[your command here]"` flag when calling `cf push`. If you are using `-c` only to configure the environment before the app starts and would like to keep the default behavior for app starting, you can invoke the default start script by appending `&& $HOME/.bp/bin/start` to your start script.
+
+### Example
+
+This command will instantiate a new cake database before running an app with the default behavior:
+
+```
+cf push cake_app -c "$HOME/app/Console/cake schema create -y && $HOME/.bp/bin/start"
+```
+
 [30 Second Tutorial]:https://github.com/cloudfoundry/php-buildpack#30-second-tutorial
 [application configuration files]:https://github.com/cloudfoundry/php-buildpack/blob/master/docs/config.md
 [include_path]:http://us1.php.net/manual/en/ini.core.php#ini.include-path
